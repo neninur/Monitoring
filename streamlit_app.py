@@ -6,13 +6,13 @@ import time
 st.set_page_config(layout="wide")
 
 # Judul Aplikasi
-st.title("Random Data Monitoring")
+st.title("Data Monitoring")
 
 # Placeholder untuk update konten
 placeholder = st.empty()
 
 # URL backend Flask (gunakan alamat IP publik atau domain)
-backend_url = "http://your_public_ip_or_domain:5000/random"
+backend_url = "http://127.0.0.1:5000/random"
 
 # Loop untuk update data secara dinamis
 while True:
