@@ -12,7 +12,7 @@ st.title("Data Monitoring")
 placeholder = st.empty()
 
 # URL backend Flask (gunakan alamat IP publik atau domain)
-backend_url = "http://127.0.0.1:5000/random"
+backend_url = "http://103.20.185.106:5000/random"
 
 # Loop untuk update data secara dinamis
 while True:
