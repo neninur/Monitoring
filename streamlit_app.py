@@ -1,32 +1,26 @@
 import streamlit as st
-import random
+import requests
 import time
 
 # Pengaturan tampilan
 st.set_page_config(layout="wide")
 
 # Judul Aplikasi
-st.title("Monitoring")
-st.subheader("Data Receive")
-
-# Fungsi untuk menghasilkan data random
-def generate_random_data():
-    return random.randint(1, 10)
+st.title("Random Data Monitoring")
 
 # Placeholder untuk update konten
 placeholder = st.empty()
 
+# URL backend Flask (gunakan alamat IP publik atau domain)
+backend_url = "http://your_public_ip_or_domain:5000/random"
+
 # Loop untuk update data secara dinamis
-iteration = 0
 while True:
-    data = generate_random_data()
-    unique_key = f"data_receive_{iteration}"  # Membuat kunci unik berdasarkan iterasi
+    response = requests.get(backend_url)
+    data = response.json()["data"]
     
     # Update konten dalam placeholder
     with placeholder.container():
-        
-        st.text_area("Data Receive", value=str(data), height=100, disabled=True, key=unique_key)
-       
+        st.text_area("Data Receive", value=str(data), height=100, disabled=True, key="data_receive")
     
-    iteration += 1
     time.sleep(1)  # Interval update dalam detik
