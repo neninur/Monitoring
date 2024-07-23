@@ -1,31 +1,22 @@
 import streamlit as st
 import requests
-import time
 
-# Pengaturan tampilan
-st.set_page_config(layout="wide")
+# URL API backend Anda
+API_URL = 'https://marinafebiyol.pythonanywhere.com/api/endpoint'
 
-# Judul Aplikasi
-st.title("Data Monitoring")
-
-# Placeholder untuk update konten
-placeholder = st.empty()
-
-# URL backend Flask (gunakan URL dari PythonAnywhere)
-backend_url = "https://marinafebiyola.pythonanywhere.com/random"
-
-# Loop untuk update data secara dinamis
-while True:
+# Mengambil data dari API backend
+def fetch_data():
     try:
-        response = requests.get(backend_url)
-        data = response.json()["data"]
-
-        # Update konten dalam placeholder
-        with placeholder.container():
-            st.text_area("Data Receive", value=str(data), height=100, disabled=True, key=f"data_receive_{time.time()}")
-
-        time.sleep(1)  # Interval update dalam detik
-
+        response = requests.get(API_URL)
+        response.raise_for_status()
+        return response.json()
     except requests.exceptions.RequestException as e:
-        st.error(f"Error: {e}")
-        break
+        st.error(f"Error fetching data: {e}")
+        return None
+
+st.title('Random Data Display')
+
+# Ambil data dan tampilkan
+data = fetch_data()
+if data:
+    st.write("Data from backend:", data['data'])
