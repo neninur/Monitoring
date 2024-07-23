@@ -19,7 +19,7 @@ while True:
 
         # Update konten dalam placeholder
         with placeholder.container():
-            st.text_area("Data Receive", value=str(data), height=100, disabled=True, key="data_receive")
+            st.text_area("Data Receive", value=str(data), height=100, disabled=True, key=f"data_receive_{time.time()}")
 
         time.sleep(1)  # Interval update dalam detik
 
