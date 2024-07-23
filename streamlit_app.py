@@ -1,5 +1,5 @@
 import streamlit as st
-import requests
+import random
 import time
 
 # Pengaturan tampilan
@@ -11,14 +11,11 @@ st.title("Data Monitoring")
 # Placeholder untuk update konten
 placeholder = st.empty()
 
-# URL backend Flask (gunakan alamat IP publik atau domain)
-backend_url = "http://103.20.185.106:5000/random"
-
 # Loop untuk update data secara dinamis
 while True:
     try:
-        response = requests.get(backend_url)
-        data = response.json()["data"]
+        # Generate data random 1-5
+        data = random.randint(1, 5)
 
         # Update konten dalam placeholder
         with placeholder.container():
@@ -26,6 +23,6 @@ while True:
 
         time.sleep(1)  # Interval update dalam detik
 
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         st.error(f"Error: {e}")
         break
