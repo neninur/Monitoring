@@ -1,22 +1,12 @@
 import streamlit as st
 import requests
 
-# URL API backend Anda
-API_URL = 'https://marinafebiyol.pythonanywhere.com/api/endpoint'
+# Ganti <ZeroTier_IP> dengan IP virtual ZeroTier dari perangkat yang menjalankan Flask
+backend_url = 'http://172.50.116.118:5000/data'
 
-# Mengambil data dari API backend
 def fetch_data():
-    try:
-        response = requests.get(API_URL)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        st.error(f"Error fetching data: {e}")
-        return None
+    response = requests.get(backend_url)
+    return response.json()
 
-st.title('Random Data Display')
-
-# Ambil data dan tampilkan
 data = fetch_data()
-if data:
-    st.write("Data from backend:", data['data'])
+st.write('Data from Flask:', data['message'])
